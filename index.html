@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Phạm Trương Vĩ Khang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Đã chỉnh màu đỏ tươi và rõ hơn một chút so với bản cũ */
+            --primary-color: #8B0000; 
+            --bg-left: #f2efe9;       
+            --text-color: #333;
+            --white: #fff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #555;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .cv-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--white);
+            display: flex;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            /* Viền đỏ lớn bên trái ngoài cùng */
+            border-left: 25px solid var(--primary-color); 
+            position: relative;
+        }
+
+        /* Thêm một dải đỏ trang trí trên cùng của toàn bộ trang giấy nếu cần (tùy chọn) */
+        /* Hiện tại tôi tập trung vào khối đỏ ở cột trái như ảnh */
+
+        /* CỘT TRÁI */
+        .left-column {
+            width: 35%;
+            background-color: var(--bg-left);
+            padding: 0 20px 30px 20px; /* Bỏ padding top để khối đỏ chạm trần */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 1px solid #ddd;
+            position: relative;
+        }
+
+        /* KHỐI ĐỎ TRANG TRÍ Ở GÓC TRÊN CÙNG TRÁI */
+        .top-red-block {
+            width: calc(100% + 40px); /* Mở rộng ra mép */
+            height: 60px;
+            background-color: var(--primary-color);
+            margin-bottom: 20px;
+            margin-left: -20px; /* Kéo sang trái để sát lề */
+            margin-right: -20px;
+        }
+
+        .photo-container {
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            margin-top: -40px; /* Đẩy ảnh lên đè lên khối đỏ một chút cho đẹp */
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: auto;
+            border: 5px solid var(--white);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            object-fit: cover;
+            background-color: #ddd; /* Màu nền tạm nếu ảnh chưa load */
+        }
+
+        .quote {
+            text-align: center;
+            font-style: italic;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .left-section {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .left-title {
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+        }
+
+        .left-content ul {
+            list-style: none;
+            padding-left: 5px;
+        }
+
+        .left-content li {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+            line-height: 1.3;
+        }
+
+        .left-content li::before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            margin-top: 3px;
+            font-size: 1.1rem;
+        }
+
+        .qr-code {
+            margin-top: auto;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+        }
+
+        /* CỘT PHẢI */
+        .right-column {
+            width: 65%;
+            padding: 50px 30px;
+            position: relative;
+        }
+        
+        /* Trang trí một dải đỏ nhỏ ở đỉnh cột phải cho đồng bộ (tùy chọn theo ảnh) */
+        .right-top-deco {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 15px;
+             background-color: var(--primary-color);
+        }
+
+        .header-name {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3.5rem; /* Tăng kích thước tên */
+            text-transform: uppercase;
+            font-weight: 900;
+            font-style: italic;
+            color: var(--primary-color);
+            line-height: 0.9;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            margin-top: 10px;
+        }
+        
+        .header-name span {
+            display: block;
+        }
+
+        .right-section {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .right-column::before {
+            content: "";
+            position: absolute;
+            left: 30px;
+            top: 180px; /* Chỉnh lại vị trí dây nối */
+            bottom: 50px;
+            width: 2px;
+            background-color: var(--primary-color);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .section-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 5px 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.2); /* Thêm chút bóng cho tiêu đề nổi hơn */
+        }
+        
+        .section-header::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .section-content ul {
+            list-style: none;
+        }
+
+        .section-content li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .section-content li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        @media (max-width: 768px) {
+            .cv-container {
+                flex-direction: column;
+                border-left: none;
+                border-top: 20px solid var(--primary-color);
+            }
+            .left-column, .right-column {
+                width: 100%;
+            }
+            .photo-container {
+                margin-top: 20px;
+            }
+            .top-red-block {
+                display: none; /* Ẩn khối đỏ trang trí trên mobile cho gọn */
+            }
+            .right-column::before {
+                display: none;
+            }
+            .section-header::before {
+                display: none;
+            }
+            .right-top-deco {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cv-container">
+        <div class="left-column">
+            <div class="top-red-block"></div>
+
+            <div class="photo-container">
+                <img src="z7442742245101_00926e78f4e35063d94f203c395765de.jpg" alt="Avatar">
+            </div>
+
+            <div class="quote">
+                "Người mạnh mẽ nhất không phải là người không bao giờ khóc, mà là người biết đứng dậy sau mỗi lần vấp ngã."
+            </div>
+
+            <div class="left-section">
+                <div class="left-title">MỤC TIÊU NGHỀ NGHIỆP</div>
+                <div class="left-content">
+                    <ul>
+                        <li>Hoàn thiện kiến thức lập trình, hệ thống mạng, cơ sở dữ liệu.</li>
+                        <li>Thành thạo ít nhất một ngôn ngữ lập trình (Java, Python, C#, v.v.), công nghệ mới (AI, Cloud, Big Data).</li>
+                        <li>Đạt vị trí nhân viên chính thức trong công ty CNTT, môi trường năng động.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Điện thoại: 0334978520</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Gmail: khangptvtd01674@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Đường Trần Bích San, Quận Liên Chiểu, Thành Phố Đà Nẵng, Việt Nam</span>
+                </div>
+            </div>
+
+            <div class="qr-code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://facebook.com" alt="QR Code">
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="right-top-deco"></div>
+
+            <div class="header-name">
+                <span>PHẠM TRƯƠNG</span>
+                <span>VĨ KHANG</span>
+            </div>
+            
+            <hr style="border: 1px solid var(--primary-color); margin-bottom: 30px;">
+
+            <div class="right-section">
+                <div class="section-header">ACHIEVEMENTS</div>
+                <div class="section-content">
+                    <ul>
+                        <li>Đạt giải khuyến khích Vovinam (2024)</li>
+                        <li>Đạt giải ba phần đối kháng võ cổ truyền (2025)</li>
+                        <li>Đạt giải hai nội dung quyền Vovinam (2025)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="section-header">EDUCATION</div>
+                <div class="section-content">
+                    <ul>
+                        <li>Đã hoàn thành chương trình học THPT</li>
+                        <li>Học chuyên ngành CNTT</li>
+                        <li>Chuyên về phát triển phần mềm</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="section-header">SKILLS</div>
+                <div class="section-content">
+                    <ul>
+                        <li>Kỹ năng làm nhóm</li>
+                        <li>Kỹ năng thuyết trình</li>
+                        <li>Kỹ năng hóa cảm xúc</li>
+                        <li>Kỹ năng quản lý thời gian</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="section-header">LIFE PERSPECTIVE</div>
+                <div class="section-content">
+                    <ul>
+                        <li>Sống tích cực và lạc quan – luôn coi khó khăn là cơ hội để học hỏi và trưởng thành.</li>
+                        <li>Không ngừng học hỏi và phát triển – kiên trì trau dồi kiến thức, kỹ năng để hoàn thiện bản thân.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
