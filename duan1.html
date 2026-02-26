@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOULSCAN - AI Brand Scanner</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0B0F1A;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+}
+
+.logo {
+  color: #00F5FF;
+  font-weight: bold;
+  font-size: 22px;
+  text-shadow: 0 0 10px #00F5FF;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+}
+
+/* ===== HERO ===== */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 50px;
+  color: #00F5FF;
+  text-shadow: 0 0 10px #00F5FF, 0 0 20px #00F5FF;
+}
+
+.hero p {
+  opacity: 0.8;
+}
+
+.neon-btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  border: 2px solid #00F5FF;
+  background: transparent;
+  color: #00F5FF;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.neon-btn:hover {
+  background: #00F5FF;
+  color: black;
+  box-shadow: 0 0 15px #00F5FF;
+}
+
+/* ===== FORM CARD ===== */
+.form-section {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.glass-card {
+  width: 500px;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,245,255,0.4);
+  box-shadow: 0 0 20px rgba(0,245,255,0.2);
+}
+
+input, textarea {
+  width: 100%;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+
+/* ===== LOADING ===== */
+.loading-overlay {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.8);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:1000;
+}
+
+.progress {
+  width: 300px;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #00F5FF;
+  box-shadow: 0 0 10px #00F5FF;
+}
+
+/* ===== RESULT ===== */
+.result-section {
+  padding: 40px;
+  display:none;
+}
+
+.result-card {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,245,255,0.3);
+  box-shadow: 0 0 20px rgba(0,245,255,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">SOULSCAN</div>
+  <div>
+    <a href="#">Dashboard</a>
+    <a href="#">Pricing</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>AI BRAND SCANNER</h1>
+  <p>Quét ký ức. Tạo thương hiệu. Sinh lợi nhuận.</p>
+  <button class="neon-btn" onclick="scrollToForm()">START SCAN</button>
+</section>
+
+<section class="form-section" id="form">
+  <div class="glass-card">
+    <h3>Phỏng Vấn Thương Hiệu</h3>
+    <input type="text" id="brand" placeholder="Tên thương hiệu">
+    <input type="text" id="product" placeholder="Sản phẩm">
+    <textarea id="story" placeholder="Câu chuyện của bạn"></textarea>
+    <textarea id="difference" placeholder="Điểm khác biệt"></textarea>
+    <button class="neon-btn" onclick="scanBrand()">PHÂN TÍCH</button>
+  </div>
+</section>
+
+<div class="loading-overlay" id="loading">
+  <h2>Scanning Brand DNA...</h2>
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+</div>
+
+<section class="result-section" id="result">
+  <div class="result-card">
+    <h3>Kết quả phân tích</h3>
+    <p id="output"></p>
+  </div>
+</section>
+
+<script>
+function scrollToForm(){
+  document.getElementById("form").scrollIntoView({behavior:"smooth"});
+}
+
+function scanBrand(){
+  document.getElementById("loading").style.display="flex";
+  let width = 0;
+  let interval = setInterval(() => {
+    if(width >= 100){
+      clearInterval(interval);
+      document.getElementById("loading").style.display="none";
+      showResult();
+    } else {
+      width++;
+      document.getElementById("progressBar").style.width = width + "%";
+    }
+  }, 20);
+}
+
+function showResult(){
+  document.getElementById("result").style.display="block";
+  let text = "Slogan: Đánh Thức Giá Trị Từ Câu Chuyện.\n\nAI gợi ý: Tập trung khai thác yếu tố truyền thống và niềm tin gia đình để tăng sức mạnh thương hiệu.";
+  typeEffect(document.getElementById("output"), text, 30);
+}
+
+function typeEffect(element, text, speed) {
+  element.innerHTML="";
+  let i = 0;
+  let timer = setInterval(() => {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+    } else {
+      clearInterval(timer);
+    }
+  }, speed);
+}
+</script>
+
+</body>
+</html>
